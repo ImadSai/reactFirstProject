@@ -39,7 +39,7 @@ class Counter extends Component {
     // Le rendu
     render() {
         return (
-            <div className="card m-3">
+            <div className="card m-3"> 
 
                 <div className="card-header"> 
                     <strong> {this.props.infos.titre} </strong> ===> {this.state.counter}

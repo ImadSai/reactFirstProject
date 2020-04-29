@@ -3,6 +3,7 @@ import './App.css';
 import Counter from './Components/Counter';
 import About from './Components/About';
 import Header from './Components/Header';
+import SearchImages from './Components/SearchImages'
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -34,6 +35,12 @@ const App = () =>  {
             <Counter infos={myObject} image="images/bart.png" />
             <Counter infos={myObject}  image="images/omer.png" />
           </Router>
+
+          {/* Search Images Path */}
+          <Router path="/searchImages">
+            <h4> Search  Images </h4>
+            <SearchImages />
+          </Router>"
 
           {/* About Path */}
           <Router path="/about">
