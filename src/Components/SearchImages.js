@@ -59,6 +59,8 @@ class SearchImages extends Component {
         window.open(url);
     };
 
+    /******** PAGINATION *********/
+
     previousPage = () => {
         if (this.state.page > 1) {
             let targetPage = this.state.page - 1;
@@ -107,8 +109,6 @@ class SearchImages extends Component {
             }
             return tabPagination;
         }
-
-        console.log(this.state.page);
     };
 
     setPage = (page) => {
@@ -117,8 +117,10 @@ class SearchImages extends Component {
         }, () => this.getImages());
     }
 
-    render() {
+    /******** PAGINATION *********/
 
+    // Render 
+    render() {
         return (
             <div className="m-5">
 
@@ -167,14 +169,11 @@ class SearchImages extends Component {
                     }
                 </div>
 
-                <pagination></pagination>
-
                 {/* Pagination */}
                 <nav aria-label="Page navigation">
                     <ul className="pagination justify-content-center">
                         <li className="page-item"><a className="btn page-link" onClick={() => this.setPage(1)}>First</a></li>
                         <li className="page-item"><a className="btn page-link" onClick={() => this.previousPage()}> &#60; </a></li>
-                        
                         {
                             this.getListPagination().map( (actual) => 
                                 <li className="page-item"><a className="btn page-link" style={{ backgroundColor: (actual == this.state.page) ? 'red' : 'transparent'}} onClick={() => this.setPage(actual)}>{actual}</a></li>
