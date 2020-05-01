@@ -95,9 +95,13 @@ class SearchImages extends Component {
                     tabPagination.push(i);
                 }
             } else if ( (actualPage - 3) <= 0 ) {
-                tabPagination = Array.from({length: 7}, (v, k) => k+1);
+                let fin = (actualPage + 6) > pages ? pages : 6;
+                for ( let i = 1; i <= fin; i++) {
+                    tabPagination.push(i);
+                }
             } else if ( (actualPage + 3) >= pages ) {
-                for ( let i = (pages - 6) ; i <= pages; i++) {
+                let debut = (pages - 6) < 1 ? 1 : (pages-6);
+                for ( let i = debut; i <= pages; i++) {
                     tabPagination.push(i);
                 }
             }
