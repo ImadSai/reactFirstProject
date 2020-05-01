@@ -11,18 +11,29 @@ class SearchImages extends Component {
             res: [],
             listeImages: [],
             rechercheTarget: '',
+            oldRechercheTarget: '',
+            page: 1,
+            perPage: 12
         }
     }
 
     // Get Images from web service
+    lancerRecherche = () => {
+        this.setState({
+                page: 1,
+                oldRechercheTarget: this.state.rechercheTarget,
+            }, () => this.getImages()); 
+    };
+
+    // Get Images Avec pagination et Target
     getImages = () => {
-        axios.get(this.urlPics + "&q=" + this.state.rechercheTarget)
+        console.log(this.state.page);
+        axios.get(this.urlPics + "&per_page=" + this.state.perPage + "&page=" + this.state.page + "&q=" + this.state.oldRechercheTarget)
             .then(response => {
                 this.setState({
                     res: response.data,
                     listeImages: response.data.hits
                 });
-                console.log(this.state.res);
             })
             .catch(err => {
                 console.error(err);
@@ -39,7 +50,7 @@ class SearchImages extends Component {
     // Get Image on Press Enter
     keyPressed = (event) => {
         if (event.key === "Enter") {
-            this.getImages();
+            this.lancerRecherche();
         }
     };
 
@@ -47,6 +58,60 @@ class SearchImages extends Component {
     openImage = (url) => {
         window.open(url);
     };
+
+    previousPage = () => {
+        if (this.state.page > 1) {
+            let targetPage = this.state.page - 1;
+            this.setState({
+                page: targetPage
+            }, () => this.getImages());
+        }
+    };
+
+    nextPage = () => {
+        if( this.state.page < this.getLastPage()  ) {
+            this.setState({
+                page: this.state.page + 1,
+            }, () => this.getImages());
+        }
+        
+    };
+
+    getLastPage = () => {
+        let nombreElements = this.state.res.totalHits == null ? 0 : this.state.res.totalHits;
+        return Math.round(nombreElements / this.state.perPage);
+    };
+
+    getListPagination = () => {
+        let nombreElements = this.state.res.totalHits == null ? 0 : this.state.res.totalHits;
+        let pages = Math.round(nombreElements / this.state.perPage);
+        let actualPage = this.state.page;
+        if(isNaN(pages)) {
+            return [];
+        } else {
+            let tabPagination = [];
+            if ((actualPage - 3) > 0 && (actualPage + 4) <= pages) {
+                for ( let i = (actualPage - 3) ; i < (actualPage + 4); i++) {
+                    tabPagination.push(i);
+                }
+            } else if ( (actualPage - 3) <= 0 ) {
+                tabPagination = Array.from({length: 7}, (v, k) => k+1);
+            } else if ( (actualPage + 3) >= pages ) {
+                for ( let i = (pages - 6) ; i <= pages; i++) {
+                    tabPagination.push(i);
+                }
+            }
+            return tabPagination;
+        }
+
+        console.log(this.state.page);
+    };
+
+    setPage = (page) => {
+        this.setState({
+            page: page,
+        }, () => this.getImages());
+    }
 
     render() {
 
@@ -64,7 +129,7 @@ class SearchImages extends Component {
                                 value={this.state.rechercheTarget} onChange={this.changeTarget}
                                 onKeyPress={this.keyPressed} />
                             <div className="input-group-append">
-                                <button onClick={() => this.getImages()}> Search ! </button>
+                                <button onClick={() => this.lancerRecherche()}> Search ! </button>
                             </div>
                         </div>
                     </div>
@@ -76,7 +141,7 @@ class SearchImages extends Component {
                 <div className="row">
                     {
                         this.state.listeImages.map((actual) =>
-                            <div className="col-lg-3 col-md-4 col-sm-4 p-3">
+                            <div className="col-lg-3 col-md-4 col-sm-6 p-3">
 
                                 <div className="card">
 
@@ -98,14 +163,21 @@ class SearchImages extends Component {
                     }
                 </div>
 
+                <pagination></pagination>
+
                 {/* Pagination */}
                 <nav aria-label="Page navigation">
                     <ul className="pagination justify-content-center">
-                        <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item"><a className="page-link" href="#">Next</a></li>
+                        <li className="page-item"><a className="btn page-link" onClick={() => this.setPage(1)}>First</a></li>
+                        <li className="page-item"><a className="btn page-link" onClick={() => this.previousPage()}> &#60; </a></li>
+                        
+                        {
+                            this.getListPagination().map( (actual) => 
+                                <li className="page-item"><a className="btn page-link" style={{ backgroundColor: (actual == this.state.page) ? 'red' : 'transparent'}} onClick={() => this.setPage(actual)}>{actual}</a></li>
+                            )
+                        }
+                        <li className="page-item"><a className="btn page-link" onClick={() => this.nextPage()}> &#62; </a></li>
+                        <li className="page-item"><a className="btn page-link" onClick={() => this.setPage(this.getLastPage())}>Last</a></li>
                     </ul>
                 </nav>
             </div>
