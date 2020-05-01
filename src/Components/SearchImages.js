@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ImageResultDisplay from './ImageResultDisplay';
 
 
 class SearchImages extends Component {
@@ -54,12 +55,13 @@ class SearchImages extends Component {
         }
     };
 
-    // Ouvrir une image dans un nouvel onglet
-    openImage = (url) => {
-        window.open(url);
-    };
-
     /******** PAGINATION *********/
+
+    goPage = (page) => {
+        this.setState({
+            page: page,
+        }, () => this.getImages());
+    }
 
     previousPage = () => {
         if (this.state.page > 1) {
@@ -71,21 +73,29 @@ class SearchImages extends Component {
     };
 
     nextPage = () => {
-        if( this.state.page < this.getLastPage()  ) {
+        let nombreElements = this.state.res.totalHits == null ? 0 : this.state.res.totalHits;
+        let indexLastPage = Math.round(nombreElements / this.state.perPage)
+        if( this.state.page < indexLastPage) {
             this.setState({
                 page: this.state.page + 1,
             }, () => this.getImages());
         }
-        
     };
 
     getLastPage = () => {
+        console.log('Last page called');
         let nombreElements = this.state.res.totalHits == null ? 0 : this.state.res.totalHits;
-        return Math.round(nombreElements / this.state.perPage);
+        let indexLastPage = Math.round(nombreElements / this.state.perPage)
+        if (indexLastPage !== this.state.page && nombreElements > 0) {
+            this.goPage(indexLastPage);
+        }
     };
 
     getFirstPage = () => {
-
+        let nombreElements = this.state.res.totalHits == null ? 0 : this.state.res.totalHits;
+        if (this.state.page != 1 && nombreElements > 0) {
+            this.goPage(1);
+        }
     };
 
     getListPagination = () => {
@@ -115,12 +125,6 @@ class SearchImages extends Component {
         }
     };
 
-    goPage = (page) => {
-        this.setState({
-            page: page,
-        }, () => this.getImages());
-    }
-
     /******** PAGINATION *********/
 
     // Render 
@@ -131,8 +135,8 @@ class SearchImages extends Component {
                 {/* Bar de recherche  */}
                 <div className="row">
                     <div className="col-md-4 p-3"></div>
-
                     <div className="col-md-4 p-3">
+
                         <div className="input-group mb-3">
                             <input type="text" 
                                 style={{ borderTopLeftRadius: '15px', borderBottomLeftRadius: '15px'}}
@@ -144,32 +148,17 @@ class SearchImages extends Component {
                                 <button className="btn btn-primary" style={{borderTopRightRadius: '15px', borderBottomRightRadius: '15px'}} onClick={() => this.lancerRecherche()}> Search </button>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                     <div className="col-md-4 p-3"></div>
                 </div>
 
                 {/* Resultat Recherche */}
                 <div className="row">
                     {
-                        this.state.listeImages.map((actual) =>
+                        this.state.listeImages.map((img) =>
                             <div className="col-lg-3 col-md-4 col-sm-6 p-3">
-
-                                <div className="card">
-
-                                    <div className="card-header">
-                                        {actual.tags.split(",")[0]}
-                                    </div>
-
-                                    <div className="card-body" >
-                                        <img style={{ width: '100%', height: '100%' }} src={actual.webformatURL} />
-                                    </div>
-
-                                    <div className="card-footer d-flex justify-content-center">
-                                        <button onClick={() => this.openImage(actual.largeImageURL)}> Download </button>
-                                    </div>
-
-                                </div>
+                                <ImageResultDisplay image={img}/>
                             </div>
                         )
                     }
@@ -178,7 +167,7 @@ class SearchImages extends Component {
                 {/* Pagination */}
                 <nav aria-label="Page navigation">
                     <ul className="pagination justify-content-center">
-                        <li className="page-item"><button className="btn page-link" onClick={() => this.goPage(1)}>First</button></li>
+                        <li className="page-item"><button className="btn page-link" onClick={() => this.getFirstPage()}>First</button></li>
                         <li className="page-item"><button className="btn page-link" onClick={() => this.previousPage()}> &#60; </button></li>
                         {
                             this.getListPagination().map( (actual) => 
@@ -186,7 +175,7 @@ class SearchImages extends Component {
                             )
                         }
                         <li className="page-item"><button className="btn page-link" onClick={() => this.nextPage()}> &#62; </button></li>
-                        <li className="page-item"><button className="btn page-link" onClick={() => this.goPage(this.getLastPage())}>Last</button></li>
+                        <li className="page-item"><button className="btn page-link" onClick={() => this.getLastPage()}>Last</button></li>
                     </ul>
                 </nav>
             </div>
