@@ -84,6 +84,10 @@ class SearchImages extends Component {
         return Math.round(nombreElements / this.state.perPage);
     };
 
+    getFirstPage = () => {
+
+    };
+
     getListPagination = () => {
         let nombreElements = this.state.res.totalHits == null ? 0 : this.state.res.totalHits;
         let pages = Math.round(nombreElements / this.state.perPage);
@@ -111,7 +115,7 @@ class SearchImages extends Component {
         }
     };
 
-    setPage = (page) => {
+    goPage = (page) => {
         this.setState({
             page: page,
         }, () => this.getImages());
@@ -130,12 +134,14 @@ class SearchImages extends Component {
 
                     <div className="col-md-4 p-3">
                         <div className="input-group mb-3">
-                            <input type="text" className="form-control"
+                            <input type="text" 
+                                style={{ borderTopLeftRadius: '15px', borderBottomLeftRadius: '15px'}}
+                                className="form-control"
                                 placeholder="Description"
                                 value={this.state.rechercheTarget} onChange={this.changeTarget}
                                 onKeyPress={this.keyPressed} />
                             <div className="input-group-append">
-                                <button onClick={() => this.lancerRecherche()}> Search ! </button>
+                                <button className="btn btn-primary" style={{borderTopRightRadius: '15px', borderBottomRightRadius: '15px'}} onClick={() => this.lancerRecherche()}> Search </button>
                             </div>
                         </div>
                     </div>
@@ -172,15 +178,15 @@ class SearchImages extends Component {
                 {/* Pagination */}
                 <nav aria-label="Page navigation">
                     <ul className="pagination justify-content-center">
-                        <li className="page-item"><a className="btn page-link" onClick={() => this.setPage(1)}>First</a></li>
-                        <li className="page-item"><a className="btn page-link" onClick={() => this.previousPage()}> &#60; </a></li>
+                        <li className="page-item"><button className="btn page-link" onClick={() => this.goPage(1)}>First</button></li>
+                        <li className="page-item"><button className="btn page-link" onClick={() => this.previousPage()}> &#60; </button></li>
                         {
                             this.getListPagination().map( (actual) => 
-                                <li className="page-item"><a className="btn page-link" style={{ backgroundColor: (actual == this.state.page) ? 'red' : 'transparent'}} onClick={() => this.setPage(actual)}>{actual}</a></li>
+                                <li className="page-item"><button className="btn page-link" style={{ backgroundColor: (actual === this.state.page) ? 'rgb(212, 212, 212)' : 'transparent'}} onClick={() => this.goPage(actual)}>{actual}</button></li>
                             )
                         }
-                        <li className="page-item"><a className="btn page-link" onClick={() => this.nextPage()}> &#62; </a></li>
-                        <li className="page-item"><a className="btn page-link" onClick={() => this.setPage(this.getLastPage())}>Last</a></li>
+                        <li className="page-item"><button className="btn page-link" onClick={() => this.nextPage()}> &#62; </button></li>
+                        <li className="page-item"><button className="btn page-link" onClick={() => this.goPage(this.getLastPage())}>Last</button></li>
                     </ul>
                 </nav>
             </div>
