@@ -9,6 +9,7 @@ class SearchImages extends Component {
     constructor() {
         super();
         this.urlPics = "https://pixabay.com/api/?key=16278676-649c0d48e5ce6a59f81bcedff&image_type=photo&pretty=true";
+        this.refSearchText = React.createRef()  
         this.state = {
             res: [],
             listeImages: [],
@@ -28,6 +29,7 @@ class SearchImages extends Component {
 
     // Get Images Avec pagination et Target
     getImages = () => {
+        window.scrollTo({ top: this.refSearchText.current.offsetTop, behavior: 'smooth'});
         console.log(this.state.page);
         axios.get(this.urlPics + "&per_page=" + this.state.perPage + "&page=" + this.state.page + "&q=" + this.state.rechercheTarget)
             .then(response => {
@@ -119,7 +121,7 @@ class SearchImages extends Component {
             <div className="m-5">
 
                 {/* Bar de recherche  */}
-                <div className="row justify-content-center">
+                <div className="row justify-content-center" ref={this.refSearchText}>
                     <div className="col-lg-6 col-md-8 col-sm-10 p-3">
                         <InputTextSearch rechercheFunction={this.lancerRecherche} />
                     </div>

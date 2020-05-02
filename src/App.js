@@ -26,7 +26,7 @@ const App = () =>  {
       <Header/>
 
       {/* Router Switch */}
-      <div className="container m-3">
+      <div className="container-fluid">
         <Switch>
 
           {/* Home Path */}
