@@ -1,19 +1,20 @@
 import React, { Component } from "react";
+import ImageResultDetail from "./ImageResultDetail";
 
 class ImageResultDisplay extends Component {
 
-    componentDidMount() {
-        console.log('Component Image Did Mount ');
-    }
+    constructor(props) {
+        super(props);
+    
+        this.state = { isDetailOpen: false };
+      }
 
-    componentDidUpdate() {
-        console.log('Component Image Did Update ');
+    // Ouvrir les details d'une image
+    toggleModal = () => {
+        this.setState({
+            isDetailOpen: !this.state.isDetailOpen
+          });
     }
-
-    // Ouvrir une image dans un nouvel onglet
-    openImage = (url) => {
-        window.open(url);
-    };
 
     render() {
         return (
@@ -28,8 +29,10 @@ class ImageResultDisplay extends Component {
                 </div>
 
                 <div className="card-footer d-flex justify-content-center">
-                    <button onClick={() => this.openImage(this.props.image.largeImageURL)}> Download </button>
+                    <button onClick={() => this.toggleModal()}> Detail </button>
                 </div>
+
+                <ImageResultDetail show={this.state.isDetailOpen} onClose={this.toggleModal} imageInfos={this.props.image}/>
 
             </div>
         )
