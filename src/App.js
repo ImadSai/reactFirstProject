@@ -9,9 +9,6 @@ import { Switch, BrowserRouter as Router } from 'react-router-dom';
 // Boostrap
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// Font-Awesome
-import '../node_modules/font-awesome/css/font-awesome.min.css'; 
-
 /* function App */
 const App = () =>  {
 
