@@ -20,7 +20,9 @@ class ImageResultDisplay extends Component {
     setFooter() {
         if (this.props.showFooter) {
             return (<div className="card-footer d-flex justify-content-center">
-            <button onClick={() => this.props.actionDisplayDetails(this.props.image)}> Detail </button>
+            <button className="btn btn-dark btn-block p-0" style={{borderRadius: '10px', borderWidth: '0px'}} onClick={() => this.props.actionDisplayDetails(this.props.image)}> 
+                <span> <i style={{fontSize: '13px'}}> Detail </i> </span>
+            </button>
         </div>);
         }
     }
