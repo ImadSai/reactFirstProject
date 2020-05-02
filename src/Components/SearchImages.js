@@ -3,6 +3,7 @@ import axios from "axios";
 import InputTextSearch from './InputTextSearch';
 import ImageResultDisplay from './ImageResultDisplay';
 import PaginationComponent from './PaginationComponent';
+import ImageResultDetail from "./ImageResultDetail";
 
 class SearchImages extends Component {
 
@@ -15,7 +16,9 @@ class SearchImages extends Component {
             listeImages: [],
             rechercheTarget: '',
             page: 1,
-            perPage: 12
+            perPage: 12,
+            isDetailOpen: false ,
+            selectedImage: null
         }
     }
 
@@ -45,6 +48,25 @@ class SearchImages extends Component {
                 }));
     };
 
+    // Ouvrir les details d'une image
+    toggleModal = (image) => {
+        this.setState({
+            isDetailOpen: !this.state.isDetailOpen,
+            selectedImage: image,
+        }, () => {
+            this.showModalDetail();
+        });
+    };
+
+    // Afficher modal Detail
+    showModalDetail = () => {
+        if(this.state.isDetailOpen) {
+            return <ImageResultDetail show={this.state.isDetailOpen} onClose={this.toggleModal} imageInfos={this.state.selectedImage} />
+        } else {
+            return;
+        }
+    }
+
     // Render 
     render() {
         return (
@@ -62,11 +84,14 @@ class SearchImages extends Component {
                     {
                         this.state.listeImages.map((img) =>
                             <div className="col-lg-3 col-md-4 col-sm-6 p-3">
-                                <ImageResultDisplay image={img} />
+                                <ImageResultDisplay showHeader={false} showFooter={true} image={img} actionDisplayDetails={this.toggleModal}/>
                             </div>
                         )
                     }
                 </div>
+
+                {/* Detail */}
+                {this.showModalDetail()}
 
                 {/* Pagination */}
                 <PaginationComponent totalElements={this.state.res.totalHits} actualPage={this.state.page} perPage={this.state.perPage} funtionToCall={this.getImages} />
