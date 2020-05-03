@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Chrono from './Components/Chrono';
+import ChronoMinuteur from './Components/ChronoMinuteur';
 import About from './Components/About';
 import Header from './Components/Header';
 import SearchImages from './Components/SearchImages'
@@ -32,9 +32,9 @@ const App = () =>  {
           </Router>
 
           {/* Counter Path */}
-          <Router path="/chrono">
-            <h4> Chronometer </h4>
-            <Chrono />
+          <Router path="/ChronoMinuteur">
+            <h4> Chronometer and Timer</h4>
+            <ChronoMinuteur />
           </Router>
 
           {/* Search Images Path */}

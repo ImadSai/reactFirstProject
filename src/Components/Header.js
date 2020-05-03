@@ -15,7 +15,7 @@ function Header() {
                 |
 
                 <li className="nav-item">
-                    <Link to="/chrono" className="nav-link">Chronometer</Link>
+                    <Link to="/ChronoMinuteur" className="nav-link">Chronometer and Timer</Link>
                 </li>
 
                 |
