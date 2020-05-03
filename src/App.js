@@ -12,11 +12,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 /* function App */
 const App = () =>  {
 
-  let myObject = {
-    titre: 'Conteur',
-    value: 1
-  };
-
   return ( 
     <Router>
       {/* Navigation Bar */}
@@ -31,15 +26,13 @@ const App = () =>  {
             <h4> Home </h4>
           </Router>
 
-          {/* Counter Path */}
+          {/* Chronometer and Timer Path */}
           <Router path="/ChronoMinuteur">
-            <h4> Chronometer and Timer</h4>
             <ChronoMinuteur />
           </Router>
 
           {/* Search Images Path */}
           <Router path="/searchImages">
-            <h4> Search  Images </h4>
             <SearchImages />
           </Router>"
 

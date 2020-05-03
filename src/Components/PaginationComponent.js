@@ -3,10 +3,6 @@ import React, { Component } from "react";
 
 class PaginationComponent extends Component {
 
-    constructor(props) {
-        super(props);
-    };
-
     goPage = (page) => {
         console.log(page);
         this.props.funtionToCall(page);
