@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Counter from './Components/Counter';
+import Chrono from './Components/Chrono';
 import About from './Components/About';
 import Header from './Components/Header';
 import SearchImages from './Components/SearchImages'
@@ -32,10 +32,9 @@ const App = () =>  {
           </Router>
 
           {/* Counter Path */}
-          <Router path="/counter">
-            <h4> Counter </h4>
-            <Counter infos={myObject} image="images/bart.png" />
-            <Counter infos={myObject}  image="images/omer.png" />
+          <Router path="/chrono">
+            <h4> Chronometer </h4>
+            <Chrono />
           </Router>
 
           {/* Search Images Path */}
