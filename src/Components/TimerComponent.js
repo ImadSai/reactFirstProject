@@ -115,7 +115,7 @@ class TimerComponent extends Component {
 
     render() {
         return (
-            <div className="row w-100">
+            <div className="row w-100" style={{ minWidth: '250px' }}>
 
                 {/* View */}
                 <div className="col-12">
