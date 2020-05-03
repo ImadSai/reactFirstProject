@@ -7,7 +7,7 @@ class ChronoMinuteur extends Component {
 
     render() {
         return (
-            <div className="container w-75">
+            <div className="container mt-5 w-75">
                 <div className="row">
 
                     {/* Timer Component */}
