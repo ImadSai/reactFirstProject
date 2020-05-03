@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import ChronoMinuteur from './Views/ChronoMinuteur';
-import About from './Views/About';
 import Header from './Views/Header';
-import SearchImages from './Views/SearchImages'
-import { Switch, BrowserRouter as Router } from 'react-router-dom';
+import SearchImages from './Views/SearchImages';
+import Home from './Views/Home';
+import { Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 // Boostrap
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -15,7 +15,7 @@ const App = () =>  {
   return ( 
     <Router>
       {/* Navigation Bar */}
-      <Header/>
+      <Header />
 
       {/* Router Switch */}
       <div className="container-fluid">
@@ -23,7 +23,7 @@ const App = () =>  {
 
           {/* Home Path */}
           <Router path="/home">
-            <h4> Home </h4>
+            <Home />
           </Router>
 
           {/* Chronometer and Timer Path */}
@@ -34,11 +34,12 @@ const App = () =>  {
           {/* Search Images Path */}
           <Router path="/searchImages">
             <SearchImages />
-          </Router>"
+          </Router>
 
-          {/* About Path */}
-          <Router path="/about">
-            <About/>
+          {/* Default Path */}
+          <Router path="/">
+            <Redirect exact from="/" to="/home" />
+            <Home />
           </Router>
 
         </Switch>
