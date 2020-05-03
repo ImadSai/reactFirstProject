@@ -1,9 +1,9 @@
-### `npm install`
+# First Projet with React
 
-and
+### Built Project
+* `npm install` to install all the dependencies from the package.json
+* `npm start` to start the project
+* Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
