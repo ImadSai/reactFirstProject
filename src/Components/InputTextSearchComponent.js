@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // Class Input Recherche 
-class InputTextSearch extends Component {
+class InputTextSearchComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -49,4 +49,4 @@ class InputTextSearch extends Component {
     }
 }
 
-export default InputTextSearch;
+export default InputTextSearchComponent;

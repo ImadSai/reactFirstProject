@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 
 
-class ImageResultDisplay extends Component {
-
-    constructor(props) {
-        super(props);
-    }
+class ImageResultDisplayComponent extends Component {
 
     // Set l'etat du header
     setHeader() {
@@ -47,4 +43,4 @@ class ImageResultDisplay extends Component {
     }
 }
 
-export default ImageResultDisplay;
+export default ImageResultDisplayComponent;

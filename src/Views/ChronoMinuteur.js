@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TimerComponent from './TimerComponent';
-import ChronoComponent from './ChronoComponent';
+import TimerComponent from '../Components/TimerComponent';
+import ChronoComponent from '../Components/ChronoComponent';
 
 /* Classe Chrono Minuteur */
 class ChronoMinuteur extends Component {

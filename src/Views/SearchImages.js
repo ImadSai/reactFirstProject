@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import InputTextSearch from './InputTextSearch';
-import ImageResultDisplay from './ImageResultDisplay';
-import PaginationComponent from './PaginationComponent';
-import ImageResultDetail from "./ImageResultDetail";
+import InputTextSearchComponent from '../Components/InputTextSearchComponent';
+import ImageResultDisplayComponent from '../Components/ImageResultDisplayComponent';
+import PaginationComponentComponent from '../Components/PaginationComponent';
+import ImageResultDetailComponent from "../Components/ImageResultDetailComponent";
 
 class SearchImages extends Component {
 
@@ -61,7 +61,7 @@ class SearchImages extends Component {
     // Afficher modal Detail
     showModalDetail = () => {
         if(this.state.isDetailOpen) {
-            return <ImageResultDetail show={this.state.isDetailOpen} onClose={this.toggleModal} imageInfos={this.state.selectedImage} />
+            return <ImageResultDetailComponent show={this.state.isDetailOpen} onClose={this.toggleModal} imageInfos={this.state.selectedImage} />
         } else {
             return;
         }
@@ -75,7 +75,7 @@ class SearchImages extends Component {
                 {/* Bar de recherche  */}
                 <div className="row justify-content-center" ref={this.refSearchText}>
                     <div className="col-lg-6 col-md-8 col-sm-10 p-3">
-                        <InputTextSearch rechercheFunction={this.lancerRecherche} />
+                        <InputTextSearchComponent rechercheFunction={this.lancerRecherche} />
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@ class SearchImages extends Component {
                     {
                         this.state.listeImages.map((img) =>
                             <div className="col-lg-3 col-md-4 col-sm-6 p-3">
-                                <ImageResultDisplay showHeader={false} showFooter={true} image={img} actionDisplayDetails={this.toggleModal}/>
+                                <ImageResultDisplayComponent showHeader={false} showFooter={true} image={img} actionDisplayDetails={this.toggleModal}/>
                             </div>
                         )
                     }
@@ -94,7 +94,7 @@ class SearchImages extends Component {
                 {this.showModalDetail()}
 
                 {/* Pagination */}
-                <PaginationComponent totalElements={this.state.res.totalHits} actualPage={this.state.page} perPage={this.state.perPage} funtionToCall={this.getImages} />
+                <PaginationComponentComponent totalElements={this.state.res.totalHits} actualPage={this.state.page} perPage={this.state.perPage} funtionToCall={this.getImages} />
 
             </div>
         );

@@ -5,7 +5,7 @@ import { faDownload, faEye, faThumbsUp } from '@fortawesome/free-solid-svg-icons
 import axios from "axios";
 
 
-class ImageResultDetail extends Component {
+class ImageResultDetailComponent extends Component {
 
     // Ouvrir une image dans un nouvel onglet
     openImage = () => {
@@ -67,4 +67,4 @@ class ImageResultDetail extends Component {
     }
 }
 
-export default ImageResultDetail;
+export default ImageResultDetailComponent;

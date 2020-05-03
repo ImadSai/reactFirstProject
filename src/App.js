@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import ChronoMinuteur from './Components/ChronoMinuteur';
-import About from './Components/About';
-import Header from './Components/Header';
-import SearchImages from './Components/SearchImages'
+import ChronoMinuteur from './Views/ChronoMinuteur';
+import About from './Views/About';
+import Header from './Views/Header';
+import SearchImages from './Views/SearchImages'
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 
 // Boostrap
