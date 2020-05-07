@@ -22,6 +22,10 @@ function Header(props) {
                     <Link to="/searchImages" className={actualPath === '/searchImages' ? 'nav-link active' : 'nav-link'}> Search Images </Link>
                 </li>
 
+                <li className="nav-item">
+                    <Link to="/uploadFile" className={actualPath === '/uploadFile' ? 'nav-link active' : 'nav-link'}> Upload Files </Link>
+                </li>
+
             </ul>
         </nav>
     )

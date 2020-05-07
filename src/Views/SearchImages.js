@@ -17,7 +17,7 @@ class SearchImages extends Component {
             rechercheTarget: '',
             page: 1,
             perPage: 12,
-            isDetailOpen: false ,
+            isDetailOpen: false,
             selectedImage: null
         }
     }
@@ -60,7 +60,7 @@ class SearchImages extends Component {
 
     // Afficher modal Detail
     showModalDetail = () => {
-        if(this.state.isDetailOpen) {
+        if (this.state.isDetailOpen) {
             return <ImageResultDetailComponent show={this.state.isDetailOpen} onClose={this.toggleModal} imageInfos={this.state.selectedImage} />
         } else {
             return;
@@ -84,7 +84,7 @@ class SearchImages extends Component {
                     {
                         this.state.listeImages.map((img) =>
                             <div className="col-lg-3 col-md-4 col-sm-6 p-3">
-                                <ImageResultDisplayComponent showHeader={false} showFooter={true} image={img} actionDisplayDetails={this.toggleModal}/>
+                                <ImageResultDisplayComponent showHeader={false} showFooter={true} image={img} actionDisplayDetails={this.toggleModal} />
                             </div>
                         )
                     }
@@ -99,6 +99,7 @@ class SearchImages extends Component {
             </div>
         );
     }
+
 }
 
 export default SearchImages;

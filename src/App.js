@@ -4,6 +4,7 @@ import ChronoMinuteur from './Views/ChronoMinuteur';
 import Header from './Views/Header';
 import SearchImages from './Views/SearchImages';
 import Home from './Views/Home';
+import UploadFile from './Views/UploadFile';
 import { Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 // Boostrap
@@ -34,6 +35,11 @@ const App = () =>  {
           {/* Search Images Path */}
           <Router path="/searchImages">
             <SearchImages />
+          </Router>
+
+          {/* Upload File Path */}
+          <Router path="/uploadFile">
+            <UploadFile />
           </Router>
 
           {/* Default Path */}
