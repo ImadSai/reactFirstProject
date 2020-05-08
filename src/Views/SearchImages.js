@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import SearchImagesService from '../Service/SearchImageService';
 import InputTextSearchComponent from '../Components/InputTextSearchComponent';
 import ImageResultDisplayComponent from '../Components/ImageResultDisplayComponent';
 import PaginationComponentComponent from '../Components/PaginationComponent';
@@ -7,10 +7,10 @@ import ImageResultDetailComponent from "../Components/ImageResultDetailComponent
 
 class SearchImages extends Component {
 
-    constructor() {
-        super();
-        this.urlPics = "https://pixabay.com/api/?key=16278676-649c0d48e5ce6a59f81bcedff&image_type=photo&pretty=true";
+    constructor(props) {
+        super(props);
         this.refSearchText = React.createRef()
+        this.apiImages = new SearchImagesService();
         this.state = {
             res: [],
             listeImages: [],
@@ -36,16 +36,14 @@ class SearchImages extends Component {
         this.setState({
             page: page
         }, () =>
-            axios.get(this.urlPics + "&per_page=" + this.state.perPage + "&page=" + this.state.page + "&q=" + this.state.rechercheTarget)
-                .then(response => {
-                    this.setState({
-                        res: response.data,
-                        listeImages: response.data.hits
-                    });
-                })
-                .catch(err => {
-                    console.error(err);
-                }));
+            this.apiImages.getImages(this.state.rechercheTarget, this.state.page, this.state.perPage).then(response => {
+                this.setState({
+                    res: response.data,
+                    listeImages: response.data.hits
+                });
+            }).catch(err => {
+                console.error(err);
+            }));
     };
 
     // Ouvrir les details d'une image
