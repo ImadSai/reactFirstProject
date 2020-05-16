@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 import EventListener from 'react-event-listener';
-import '../styles/uploadFile.css'
+import '../Styles/uploadFile.css'
 
 // Drag and Drop zone 
 class DragAndDropZoneComponent extends Component {

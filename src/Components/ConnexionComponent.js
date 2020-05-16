@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import '../styles/connexion.css'
+import '../Styles/connexion.css'
 
 class ConnexionComponent extends Component {
 
