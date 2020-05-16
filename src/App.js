@@ -5,13 +5,15 @@ import Header from './Views/Header';
 import SearchImages from './Views/SearchImages';
 import Home from './Views/Home';
 import UploadFile from './Views/UploadFile';
+import Connexion from './Views/Connexion';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 // Boostrap
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const isLoggedIn = function() {
-  return true
+  const token = localStorage.getItem('token');
+  return (token !== null);
 }
 
 /* function App */
@@ -29,6 +31,9 @@ const App = () => {
           {/* Home Path */}
           <Route component={Home} path="/home" />
 
+          {/* Login Path */}
+          <Route component={Connexion} path="/login" />
+
           {/* Chronometer and Timer Path */}
           <Route component={ChronoMinuteur} path="/ChronoMinuteur" />
 
@@ -36,7 +41,7 @@ const App = () => {
           <Route component={SearchImages} path="/searchImages" />
 
           {/* Upload File Path */}
-          <Route path="/uploadFile" render={() => ( isLoggedIn() ? <UploadFile/> : <Redirect to="/home"/>)} />
+          <Route path="/uploadFile" render={() => ( isLoggedIn() ? <UploadFile/> : <Redirect to="/login"/>)} />
 
           {/* Default Path */}
           <Router path="/">
@@ -45,7 +50,6 @@ const App = () => {
           </Router>
 
         </Switch>
-
       </div>
 
     </Router>

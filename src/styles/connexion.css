@@ -1,0 +1,28 @@
+.container-connexion {
+    border: 1px solid rgb(43, 42, 42);
+    background-color: rgb(26, 26, 26);
+    border-radius: 10px;
+    padding: 15px;
+    width: 320px;
+    height: 100%;
+}
+
+.input-text {
+    width: 100%;
+    border: 1px solid rgb(110, 110, 110);
+    border-radius: 10px;
+    background-color: inherit;
+    font-size: 15px;
+    padding: 10px 16px;
+}
+
+.input-text:focus {
+    outline: none;
+}
+
+.btn-connexion {
+    width: 100%;
+    border-radius: 10px !important;
+    font-size: 17px !important;
+    height: 44px;
+}

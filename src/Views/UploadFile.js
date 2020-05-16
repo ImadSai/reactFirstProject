@@ -19,7 +19,8 @@ class UploadFile extends Component {
         });
     };
 
-    uploadFileView = () => {
+    // Render 
+    render() {
         if (this.state.filesToUpload.length === 0) {
             return (
                 <div className="container w-75 mt-3">
@@ -33,13 +34,6 @@ class UploadFile extends Component {
                 </div>
             );
         }
-    }
-
-    // Render 
-    render() {
-
-        return this.uploadFileView()
-        
     }
 }
 
