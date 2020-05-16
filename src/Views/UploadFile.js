@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DragAndDropZoneComponent from '../Components/DragAndDropZoneComponent';
 import SendFileComponent from '../Components/SendFileComponent';
-import '../Styles/uploadFile.css'
+import ConnexionComponent from '../Components/ConnexionComponent';
 
 class UploadFile extends Component {
 
@@ -19,8 +19,7 @@ class UploadFile extends Component {
         });
     };
 
-    // Render 
-    render() {
+    uploadFileView = () => {
         if (this.state.filesToUpload.length === 0) {
             return (
                 <div className="container w-75 mt-3">
@@ -34,6 +33,13 @@ class UploadFile extends Component {
                 </div>
             );
         }
+    }
+
+    // Render 
+    render() {
+
+        return this.uploadFileView()
+        
     }
 }
 

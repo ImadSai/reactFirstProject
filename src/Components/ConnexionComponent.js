@@ -4,7 +4,7 @@ class ConnexionComponent extends Component {
 
     render() {
         return (
-            <div>  </div>
+            <div> Connexion   </div>
         );
     }
 
