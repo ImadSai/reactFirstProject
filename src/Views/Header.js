@@ -1,10 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
+import '../Styles/header.css';
 
 function Header(props) {
 
     let actualPath = useLocation().pathname;
+    let history = useHistory();
+
+    const goToLogin = () => {
+        history.push("/login");
+    }
+
+    const getUserStatus = () => {
+        if(actualPath!== '/login') {
+            return ( <button class="btn btn-secondary signin-btn" onClick={() => goToLogin()}> Sign in </button> );
+        }
+    }
 
     return (
         <nav className="navbar navbar-expand">
@@ -27,6 +39,9 @@ function Header(props) {
                 </li>
 
             </ul>
+
+            {getUserStatus()}
+
         </nav>
     )
 
