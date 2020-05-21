@@ -11,7 +11,7 @@ import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-d
 // Boostrap
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-const isLoggedIn = function() {
+const isLoggedIn = function () {
   const token = localStorage.getItem('token');
   return (token !== null);
 }
@@ -28,11 +28,11 @@ const App = () => {
       <div className="container-fluid">
         <Switch>
 
+          {/* Login Path */}
+          <Route component={() => <Connexion callerPath="/home"/>}  path="/login" />
+
           {/* Home Path */}
           <Route component={Home} path="/home" />
-
-          {/* Login Path */}
-          <Route component={Connexion} path="/login" />
 
           {/* Chronometer and Timer Path */}
           <Route component={ChronoMinuteur} path="/ChronoMinuteur" />
@@ -41,7 +41,7 @@ const App = () => {
           <Route component={SearchImages} path="/searchImages" />
 
           {/* Upload File Path */}
-          <Route path="/uploadFile" render={() => ( isLoggedIn() ? <UploadFile/> : <Redirect to="/login"/>)} />
+          <Route path="/uploadFile" render={() => (isLoggedIn() ? <UploadFile /> : <Connexion callerPath="/uploadFile" />)} />
 
           {/* Default Path */}
           <Router path="/">

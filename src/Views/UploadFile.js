@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DragAndDropZoneComponent from '../Components/DragAndDropZoneComponent';
 import SendFileComponent from '../Components/SendFileComponent';
-import ConnexionComponent from '../Components/ConnexionComponent';
+import ListFilesComponent from '../Components/ListFilesComponent'
 
 class UploadFile extends Component {
 
@@ -23,8 +23,13 @@ class UploadFile extends Component {
     render() {
         if (this.state.filesToUpload.length === 0) {
             return (
-                <div className="container w-75 mt-3">
-                    <DragAndDropZoneComponent updateListFunction={this.updateFile} />
+                <div>
+                    <div className="container w-75 mt-3">
+                        <DragAndDropZoneComponent updateListFunction={this.updateFile} />
+                    </div>
+                    <div className="container w-75 mt-3">
+                        <ListFilesComponent />
+                    </div>
                 </div>
             );
         } else {

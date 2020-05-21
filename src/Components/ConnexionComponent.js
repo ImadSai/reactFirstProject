@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UserService from '../Service/UserService';
-import '../Styles/connexion.css'
+import '../Styles/connexion.css';
 
 class ConnexionComponent extends Component { 
 
@@ -15,6 +15,7 @@ class ConnexionComponent extends Component {
         }
     }
 
+    
     // update user field
     changeUser = (event) => {
         this.setState({
@@ -31,6 +32,7 @@ class ConnexionComponent extends Component {
 
     // Login
     login = () => {
+
         this.setState({
             error: false
         });
@@ -38,20 +40,24 @@ class ConnexionComponent extends Component {
         // Call login
         this.api.login(this.state.user, this.state.password).then( (rep) => {
             console.log(rep);
-            console.log('loged');
+            localStorage.setItem('token', JSON.stringify(rep.data.token));
+            localStorage.setItem('user', JSON.stringify(rep.data.user));
+            this.props.redirectFunction();
         }, (error) => {
+            console.log(error);
             if (error.response.status === 401) {
                 this.setState({
                     error: true,
-                    errorMessage: 'User/Password failed',
+                    errorMessage: 'Username or Password is invalid',
                 });
             }
         });
     }
 
+    // Recupérer les informations du component
     getInformations = () => {
         if(this.state.error === true ) {
-            return <div> {this.state.errorMessage} </div>
+            return <div className="alert alert-danger p-1 text-center" > {this.state.errorMessage} </div>
         }
     }
 
@@ -79,7 +85,6 @@ class ConnexionComponent extends Component {
             </div>
         );
     }
-
 }
 
 export default ConnexionComponent;

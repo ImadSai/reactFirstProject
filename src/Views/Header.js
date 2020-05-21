@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, Link } from 'react-router-dom';
 import '../Styles/header.css';
 
 function Header(props) {
@@ -12,14 +11,40 @@ function Header(props) {
         history.push("/login");
     }
 
+    const logout = () => {
+        localStorage.clear();
+        history.push("/login");
+    }
+
+    const getInfoUser = () => {
+        let user = JSON.parse(localStorage.getItem('user'));
+        console.log(user);
+        return (
+            <div>
+                <span className={user.status === 'valide' ? 'dot-active' : 'dot-disabled'}></span>
+                <span className="font-weight-bold ml-3" > {user.name} </span>
+            </div>
+        );
+    }
+
     const getUserStatus = () => {
-        if(actualPath!== '/login') {
-            return ( <button class="btn btn-secondary signin-btn" onClick={() => goToLogin()}> Sign in </button> );
+        if (localStorage.getItem('token') === null) {
+            if (actualPath !== '/login')
+                return (<button className="btn btn-secondary" onClick={() => goToLogin()}> Sign in </button>);
+        } else {
+            return (
+                <div className="form-inline d-flex justify-content-center">
+                    <span> {getInfoUser()} </span>
+                    <div className="vl" />
+                    <button className="btn btn-danger" onClick={() => logout()}> Log out </button>
+                </div>
+            );
         }
     }
 
     return (
-        <nav className="navbar navbar-expand">
+
+        <nav className="navbar navbar-expand justify-content-between">
             <ul className="nav nav-tabs">
 
                 <li className="nav-item">
@@ -44,7 +69,6 @@ function Header(props) {
 
         </nav>
     )
-
 };
 
 export default Header;

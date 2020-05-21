@@ -8,15 +8,19 @@ export default class UploadFilesService {
         this.apiUrl = myConfig.apiUrl + '/files';
     }
 
+    // Envoyer un file au serveur
     uploadFiles = (files) => {
-        console.log(this.apiUrl);
         const formData = new FormData();
-        for( var file in files ) {
-            formData.append('file',files[file]);
+        for (var file in files) {
+            formData.append('file', files[file]);
         }
         axios.post(this.apiUrl + '/uploadFile', formData).then((res) => {
             console.log(res);
         });
     };
 
+    // Récupérer les fichiers 
+    getFiles = (userId, page, perPage) => {
+        return axios.get(this.apiUrl + '/getfiles', { params: {userId: userId, page: page, perPage: perPage} });
+    }
 }
